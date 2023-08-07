@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Category>
+<div class="right_col" role="main">
+    <div class="">
+        <div class="row" style="display: block;">
+            <div class="clearfix"></div>
+            <div class="col-md-12 col-sm-12  ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Kategori Yönetimi</h2>
+                        <a asp-controller="Category" asp-action="New" class="btn btn-success float-right" style="color:#fff">Yeni Kategori</a>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="table-responsive">
+                            <table class="table table-striped jambo_table bulk_action">
+                                <thead>
+                                    <tr class="headings">
+                                        <th class="column-title">Kategori Adı </th>
+                                        <th class="column-title">Üst Kategori Adı </th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Category category in Model)
+                                    {
+                                        <tr class="even pointer">
+                                            <td><a asp-controller="Category" asp-action="Edit" asp-route-id="@category.ID">@category.Name</a></td>
+                                            <td>
+                                                @if (category.ParentID != null)
+                                                {
+                                                    <span>@category.ParentCategory.Name</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>Üst Kategori Seçilmedi</span>
+                                                }
+                                            </td>
+                                            <td><a onclick="$('#modalCategory').modal();$('.deleteYes').attr('href','/admin/category/delete/@category.ID')" class="btn btn-danger float-right" style="color:#fff">Sil</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->
+<div class="modal fade" id="modalCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">DİKKAT!..</h1>
+                <a style="cursor:pointer;color:red" onclick="$(this).closest('.modal').modal('hide')">X</a>
+            </div>
+            <div class="modal-body">
+                Seçili Kategori Kaydı Silinecektir<br />Silmek istediğinizden emin misiniz?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="$(this).closest('.modal').modal('hide')">Hayır</button>
+                <a class="btn btn-primary deleteYes">Evet</a>
+            </div>
+        </div>
+    </div>
+</div>

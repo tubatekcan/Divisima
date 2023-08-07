@@ -1,0 +1,95 @@
+﻿@model ProductVM
+<div class="right_col" role="main">
+    <div class="">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Yeni Ürün Ekle</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form asp-controller="Product" asp-action="New" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                            <div class="item form-group">
+                                <label class="col-form-label col-12 col-sm-2 label-align" asp-for="Product.Name">
+                                </label>
+                                <div class="col-12 col-sm-10">
+                                    <input asp-for="Product.Name" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-12 col-sm-2 label-align" asp-for="Product.BrandID">
+                                </label>
+                                <div class="col-12 col-sm-10">
+                                    <select asp-for="Product.BrandID" class="form-control" asp-items="@Model.Brands.Select(x =>new SelectListItem { Text=x.Name,Value=x.ID.ToString()})">
+                                        <option value="">Bir Marka Seçiniz</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-12 col-sm-2 label-align" asp-for="Product.ProductCategories">
+                                </label>
+                                <div class="col-12 col-sm-10">
+                                    @foreach (Category category in Model.Categories)
+                                    {
+                                        <div style="width:20%;float:left">
+                                            <input name="SelectedCategoryID" style="margin-right:5px" type="checkbox" id="category_@category.ID" value="@category.ID" /><label style="cursor:pointer" for="category_@category.ID">@category.Name</label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-12 col-sm-2 label-align" asp-for="Product.Price">
+                                </label>
+                                <div class="col-12 col-sm-10">
+                                    <input asp-for="Product.Price" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-12 col-sm-2 label-align" asp-for="Product.Description">
+                                </label>
+                                <div class="col-12 col-sm-10">
+                                    <textarea asp-for="Product.Description" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-12 col-sm-2 label-align" asp-for="Product.Detail">
+                                </label>
+                                <div class="col-12 col-sm-10">
+                                    <textarea asp-for="Product.Detail" class="form-control editor"></textarea>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-12 col-sm-2 label-align" asp-for="Product.Stock">
+                                </label>
+                                <div class="col-12 col-sm-10">
+                                    <input asp-for="Product.Stock" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-12 col-sm-2 label-align" asp-for="Product.DisplayIndex">
+                                </label>
+                                <div class="col-12 col-sm-10">
+                                    <input asp-for="Product.DisplayIndex" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                                <div class="col-12">
+                                    <a asp-controller="Product" asp-action="Index" class="btn btn-primary" style="color:#fff">İptal</a>
+                                    <button class="btn btn-primary" type="reset">Temizle</button>
+                                    <button type="submit" class="btn btn-success">Ekle</button>
+                                </div>
+
+                            </div>
+                            <div asp-validation-summary="All"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- /page content -->

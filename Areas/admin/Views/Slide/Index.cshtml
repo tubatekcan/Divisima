@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Slide>
+<div class="right_col" role="main">
+    <div class="">
+        <div class="row" style="display: block;">
+            <div class="clearfix"></div>
+            <div class="col-md-12 col-sm-12  ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Slayt Yönetimi</h2>
+                        <a asp-controller="Slide" asp-action="New" class="btn btn-success float-right" style="color:#fff">Yeni Slayt</a>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="table-responsive">
+                            <table class="table table-striped jambo_table bulk_action">
+                                <thead>
+                                    <tr class="headings">
+                                        <th class="column-title">Adı</th>
+                                        <th class="column-title">Başlığı</th>
+                                        <th class="column-title">Resmi</th>
+                                        <th class="column-title">Fiyatı</th>
+                                        <th class="column-title">Görüntülenme Sırası</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Slide slide in Model)
+                                    {
+                                        <tr class="even pointer">
+                                            <td><a asp-controller="Slide" asp-action="Edit" asp-route-id="@slide.ID">@slide.Name</a></td>
+                                            <td>@slide.Title</td>
+                                            <td><img src="@slide.Picture" height="80" /></td>
+                                            <td>@slide.Price TL</td>
+                                            <td>@slide.DisplayIndex</td>
+                                            <td><a onclick="$('#modalSlide').modal();$('.deleteYes').attr('href','/admin/slide/delete/@slide.ID')" class="btn btn-danger float-right" style="color:#fff">Sil</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->
+<div class="modal fade" id="modalSlide" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">DİKKAT!..</h1>
+                <a style="cursor:pointer;color:red" onclick="$(this).closest('.modal').modal('hide')">X</a>
+            </div>
+            <div class="modal-body">
+                Seçili Slayt Kaydı Silinecektir<br />Silmek istediğinizden emin misiniz?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="$(this).closest('.modal').modal('hide')">Hayır</button>
+                <a class="btn btn-primary deleteYes">Evet</a>
+            </div>
+        </div>
+    </div>
+</div>

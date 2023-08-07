@@ -1,0 +1,99 @@
+﻿@model OrderVM
+<div class="page-top-info">
+    <div class="container">
+        <h4>Your cart</h4>
+        <div class="site-pagination">
+            <a href="/">Ana Sayfa</a> /
+            <a asp-controller="Cart" asp-action="Index">Alışveriş Sepetim</a>
+        </div>
+    </div>
+</div>
+<!-- Page info end -->
+<!-- checkout section  -->
+<section class="checkout-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 order-2 order-lg-1">
+                <form class="checkout-form" asp-controller="Cart" asp-action="Checkout" method="post">
+                    <div class="cf-title">Teslimat Bilgisi</div>
+                    <div class="row address-inputs">
+                        <div class="col-md-6">
+                            <input asp-for="@Model.Order.NameSurname" placeholder="Adı Soyadı">
+                        </div>
+                        <div class="col-md-6">
+                            <input asp-for="@Model.Order.MailAddress" placeholder="Mail Adresi">
+                        </div>
+                        <div class="col-md-6">
+                            <input asp-for="@Model.Order.Phone" placeholder="Telefon Numarası">
+                        </div>
+                        <div class="col-md-6">
+                            <input asp-for="@Model.Order.ZipCode" placeholder="Posta Kodu">
+                        </div>
+                        <div class="col-md-12">
+                            <input type="text" placeholder="Address">
+                        </div>
+                        <div class="col-md-6">
+                            <select asp-for="@Model.Order.City" asp-items="@Model.Cities.Select(x=>new SelectListItem { Text=x.Name,Value=x.ID.ToString()})">
+                                <option>Lütfen Şehir Seçiniz</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                           <select asp-for="@Model.Order.District"></select>
+                        </div>
+                    </div>
+                    <div class="cf-title">Delievery Info</div>
+                    <div class="row shipping-btns">
+                        <div class="col-6">
+                            <h4>Standard</h4>
+                        </div>
+                        <div class="col-6">
+                            <div class="cf-radio-btns">
+                                <div class="cfr-item">
+                                    <input type="radio" name="shipping" id="ship-1">
+                                    <label for="ship-1">Free</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <h4>Next day delievery  </h4>
+                        </div>
+                        <div class="col-6">
+                            <div class="cf-radio-btns">
+                                <div class="cfr-item">
+                                    <input type="radio" name="shipping" id="ship-2">
+                                    <label for="ship-2">$3.45</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cf-title">Payment</div>
+                    <ul class="payment-list">
+                        <li>Paypal<a href="#"><img src="img/paypal.png" alt=""></a></li>
+                        <li>Credit / Debit card<a href="#"><img src="img/mastercart.png" alt=""></a></li>
+                        <li>Pay when you get the package</li>
+                    </ul>
+                    <button class="site-btn submit-order-btn">Place Order</button>
+                </form>
+            </div>
+            <div class="col-lg-4 order-1 order-lg-2">
+                <div class="checkout-cart">
+                    <h3>Alışveriş Sepetim</h3>
+                    <ul class="product-list">
+                        @foreach (Cart cart in Model.Carts)
+                        {
+                            <li>
+                                <div class="pl-thumb"><img src="@cart.ProductPicture" alt="@cart.ProductName"></div>
+                                <h6>@cart.ProductName</h6>
+                                <p>@cart.ProductPrice ₺</p>
+                            </li>
+                        }
+                    </ul>
+                    <ul class="price-list">
+                        <li class="total">Toplam<span>@Model.Carts.Sum(x=>x.ProductPrice*x.Quantity)</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- checkout section end -->

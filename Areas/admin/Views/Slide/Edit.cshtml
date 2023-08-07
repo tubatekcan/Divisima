@@ -1,0 +1,84 @@
+﻿@model Slide
+<div class="right_col" role="main">
+    <div class="">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Yeni Slayt Ekle</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form enctype="multipart/form-data" asp-controller="Slide" asp-action="Edit" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                            <input asp-for="ID" type="hidden" />
+                            <input asp-for="Picture" type="hidden" />
+                            <div class="item form-group">
+                                <label class="col-form-label col-12 col-sm-2 label-align" asp-for="Name">
+                                </label>
+                                <div class="col-12 col-sm-10">
+                                    <input asp-for="Name" class="form-control">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-12 col-sm-2 label-align" asp-for="Title">
+                                </label>
+                                <div class="col-12 col-sm-10">
+                                    <input asp-for="Title" class="form-control">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-12 col-sm-2 label-align" asp-for="Picture">
+                                </label>
+                                <div class="col-12 col-sm-10">
+                                    <input asp-for="Picture" type="file" accept="image/*" class="form-control">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-12 col-sm-2 label-align" asp-for="Description">
+                                </label>
+                                <div class="col-12 col-sm-10">
+                                    <input asp-for="Description" class="form-control">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-12 col-sm-2 label-align" asp-for="Price">
+                                </label>
+                                <div class="col-12 col-sm-10">
+                                    <input asp-for="Price" class="form-control">
+                                    <span asp-validation-for="Price" style="color:red"></span>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-12 col-sm-2 label-align" asp-for="Link">
+                                </label>
+                                <div class="col-12 col-sm-10">
+                                    <input asp-for="Link" class="form-control">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-12 col-sm-2 label-align" asp-for="DisplayIndex">
+                                </label>
+                                <div class="col-12 col-sm-10">
+                                    <input asp-for="DisplayIndex" class="form-control">
+                                    <span asp-validation-for="DisplayIndex" style="color:red"></span>
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                                <div class="col-12">
+                                    <a asp-controller="Slide" asp-action="Index" class="btn btn-primary" style="color:#fff">İptal</a>
+                                    <button class="btn btn-primary" type="reset">Temizle</button>
+                                    <button type="submit" class="btn btn-success">Güncelle</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- /page content -->
